@@ -1,8 +1,12 @@
 [phases.setup]
-nixPkgs = ["python312"]
+nixPkgs = ["python312", "curl"]
 
 [phases.install]
-cmds = ["uv sync"]
+cmds = [
+  "curl -LsSf https://astral.sh/uv/install.sh | sh",
+  "export PATH=$HOME/.cargo/bin:$PATH",
+  "uv sync"
+]
 
 [phases.build]
 cmds = ["python manage.py collectstatic --noinput"]
