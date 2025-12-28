@@ -1,0 +1,11 @@
+[phases.setup]
+nixPkgs = ["python312"]
+
+[phases.install]
+cmds = ["uv sync"]
+
+[phases.build]
+cmds = ["python manage.py collectstatic --noinput"]
+
+[start]
+cmd = "uv run gunicorn app.wsgi:application --bind 0.0.0.0:$PORT"
